@@ -1,0 +1,16 @@
+config:
+  spec:
+    destination:
+      server: https://kubernetes.default.svc
+    source:
+      repoURL: https://github.com/danielnegreiros/devops-quests
+      targetRevision: main
+
+applications:
+  security:
+    - name: vault
+    - name: external-secrets-operator
+    - name: cert-manager
+  networking:
+    - name: metallb
+    - name: ingress-nginx

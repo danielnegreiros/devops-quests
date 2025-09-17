@@ -1,0 +1,5 @@
+argo-cd:
+  server:
+    service:
+      type: NodePort
+      nodePortHttp: 30080

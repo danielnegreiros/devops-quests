@@ -1,0 +1,29 @@
+{{- range $namespace, $apps := .Values.applications }}
+{{- range $apps }}
+{{- $config := $.Values.config -}}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .name | quote }}
+  namespace: argo
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ $namespace | quote }}
+    server:  {{ $config.spec.destination.server | quote }}
+  project: default
+  source:
+    path: {{ printf "deployment/applications/namespaces/%s/%s" $namespace .name }}
+    repoURL: {{ $config.spec.source.repoURL }}
+    targetRevision: {{ $config.spec.source.targetRevision }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    automated:
+      prune: true
+      selfHeal: true
+---
+{{ end -}}
+{{ end -}}

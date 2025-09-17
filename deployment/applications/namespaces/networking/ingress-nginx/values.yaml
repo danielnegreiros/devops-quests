@@ -1,0 +1,4 @@
+ingress-nginx:
+  controller:
+    extraArgs:
+      default-ssl-certificate: "security/ingress-tls-secret"
