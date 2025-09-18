@@ -2,12 +2,7 @@ postgresql:
   global:
     postgresql:
       auth:
-        postgresPassword: ""
-        username: ""
-        password: ""
-        database: ""
-        existingSecret: ""
+        existingSecret: kube-bench-pg-credentials
         secretKeys:
-          adminPasswordKey: ""
-          userPasswordKey: ""
-          replicationPasswordKey: ""
+          adminPasswordKey: pass
+          userPasswordKey: user
