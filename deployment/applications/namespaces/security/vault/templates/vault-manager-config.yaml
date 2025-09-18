@@ -55,8 +55,8 @@ data:
       - type: kv-v2
         path: cluster
         secrets:
-          - path: internal/postgres/credentials
-            name: kube-bench-exporter
+          - path: internal/kube-bench-exporter/postgres
+            name: credential
             data:
               user: "*random*"
               pass: "*random*"
