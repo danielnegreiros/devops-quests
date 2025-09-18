@@ -51,6 +51,16 @@ data:
             name: token
             data:
               token: "*random*"
+
+      - type: kv-v2
+        path: cluster
+        secrets:
+          - path: internal/postgres/credentials
+            name: kube-bench-exporter
+            data:
+              user: "*random*"
+              pass: "*random*"
+              
     exporter:
       kubernetes:
         access: in-cluster
