@@ -11,6 +11,7 @@ applications:
     - name: vault
     - name: external-secrets-operator
     - name: cert-manager
+    - name: kube-bench-exporter
   networking:
     - name: metallb
     - name: ingress-nginx
