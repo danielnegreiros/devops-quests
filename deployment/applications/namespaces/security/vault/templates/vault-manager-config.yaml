@@ -44,6 +44,12 @@ data:
       - type: kv-v2
         path: unlocker
 
+      - path: observability/grafana
+        name: credentials
+        data:
+          user: "admin"
+          password: "*random*"
+
       - type: kv-v2
         path: cluster
         secrets:
@@ -60,7 +66,7 @@ data:
             data:
               user: "*random*"
               pass: "*random*"
-              
+
     exporter:
       kubernetes:
         access: in-cluster

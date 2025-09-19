@@ -1,0 +1,10 @@
+grafana:
+  admin:
+    existingSecret: grafana-external-secret
+    userKey: grafana-admin-user
+    passwordKey: grafana-admin-password
+
+  sidecar:
+    skipTlsVerify: true
+    datasources:
+      enabled: true
