@@ -45,7 +45,7 @@ data:
         path: unlocker
 
       - type: kv-v2
-        path: observability/grafana
+        path: internal/observability/grafana
         name: credentials
         data:
           user: "admin"
