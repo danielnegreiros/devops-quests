@@ -11,7 +11,7 @@ spec:
     spec:
       restartPolicy: Never
       hostPID: true
-      containers:
+      initContainers:
         - name: kube-bench
           image: docker.io/aquasec/kube-bench:v0.12.0
           command: ["sh", "-c", "kube-bench --json | tee /logs/output.log"]
@@ -54,12 +54,17 @@ spec:
             - name: opt-cni-bin
               mountPath: /opt/cni/bin/
               readOnly: true
-
+      containers:
         - name: kube-bench-exporter
           image: danielnegreiros/kube-bench-exporter
           env:
             - name: OUTPUT_PATH
               value: /logs/output.log
+            - name: PG_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-postgres-config
+                  key: host
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
