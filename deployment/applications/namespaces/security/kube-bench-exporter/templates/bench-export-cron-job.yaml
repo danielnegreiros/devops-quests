@@ -1,120 +1,122 @@
 apiVersion: batch/v1
-kind: Job
+kind: CronJob
 metadata:
   name: kube-bench
   namespace: security
 spec:
-  template:
-    metadata:
-      labels:
-        app: kube-bench
+  schedule: "0 * * * *"  # Run every hour at minute 0
+  jobTemplate:
     spec:
-      restartPolicy: Never
-      hostPID: true
-      initContainers:
-        - name: kube-bench
-          image: docker.io/aquasec/kube-bench:v0.12.0
-          command: ["sh", "-c", "kube-bench --json | tee /logs/output.log"]
-          volumeMounts:
+      template:
+        metadata:
+          labels:
+            app: kube-bench
+        spec:
+          restartPolicy: Never
+          hostPID: true
+          initContainers:
+            - name: kube-bench
+              image: docker.io/aquasec/kube-bench:v0.12.0
+              command: ["sh", "-c", "kube-bench --json | tee /logs/output.log"]
+              volumeMounts:
+                - name: shared-logs
+                  mountPath: /logs
+                - name: var-lib-cni
+                  mountPath: /var/lib/cni
+                  readOnly: true
+                - name: var-lib-etcd
+                  mountPath: /var/lib/etcd
+                  readOnly: true
+                - name: var-lib-kubelet
+                  mountPath: /var/lib/kubelet
+                  readOnly: true
+                - name: var-lib-kube-scheduler
+                  mountPath: /var/lib/kube-scheduler
+                  readOnly: true
+                - name: var-lib-kube-controller-manager
+                  mountPath: /var/lib/kube-controller-manager
+                  readOnly: true
+                - name: etc-systemd
+                  mountPath: /etc/systemd
+                  readOnly: true
+                - name: lib-systemd
+                  mountPath: /lib/systemd
+                  readOnly: true
+                - name: srv-kubernetes
+                  mountPath: /srv/kubernetes
+                  readOnly: true
+                - name: etc-kubernetes
+                  mountPath: /etc/kubernetes
+                  readOnly: true
+                - name: usr-bin
+                  mountPath: /usr/local/mount-from-host/bin
+                  readOnly: true
+                - name: etc-cni-netd
+                  mountPath: /etc/cni/net.d/
+                  readOnly: true
+                - name: opt-cni-bin
+                  mountPath: /opt/cni/bin/
+                  readOnly: true
+          containers:
+            - name: kube-bench-exporter
+              image: danielnegreiros/kube-bench-exporter
+              env:
+                - name: OUTPUT_PATH
+                  value: /logs/output.log
+                - name: PG_HOST
+                  valueFrom:
+                    configMapKeyRef:
+                      name: {{ .Release.Name }}-postgres-config
+                      key: host
+                - name: PG_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: kube-bench-pg-credentials
+                      key: user
+                - name: PG_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      name: kube-bench-pg-credentials
+                      key: pass
+              volumeMounts:
+                - name: shared-logs
+                  mountPath: /logs
+          volumes:
             - name: shared-logs
-              mountPath: /logs
+              emptyDir: {}
             - name: var-lib-cni
-              mountPath: /var/lib/cni
-              readOnly: true
+              hostPath:
+                path: /var/lib/cni
             - name: var-lib-etcd
-              mountPath: /var/lib/etcd
-              readOnly: true
+              hostPath:
+                path: /var/lib/etcd
             - name: var-lib-kubelet
-              mountPath: /var/lib/kubelet
-              readOnly: true
+              hostPath:
+                path: /var/lib/kubelet
             - name: var-lib-kube-scheduler
-              mountPath: /var/lib/kube-scheduler
-              readOnly: true
+              hostPath:
+                path: /var/lib/kube-scheduler
             - name: var-lib-kube-controller-manager
-              mountPath: /var/lib/kube-controller-manager
-              readOnly: true
+              hostPath:
+                path: /var/lib/kube-controller-manager
             - name: etc-systemd
-              mountPath: /etc/systemd
-              readOnly: true
+              hostPath:
+                path: /etc/systemd
             - name: lib-systemd
-              mountPath: /lib/systemd
-              readOnly: true
+              hostPath:
+                path: /lib/systemd
             - name: srv-kubernetes
-              mountPath: /srv/kubernetes
-              readOnly: true
+              hostPath:
+                path: /srv/kubernetes
             - name: etc-kubernetes
-              mountPath: /etc/kubernetes
-              readOnly: true
+              hostPath:
+                path: /etc/kubernetes
             - name: usr-bin
-              mountPath: /usr/local/mount-from-host/bin
-              readOnly: true
+              hostPath:
+                path: /usr/bin
             - name: etc-cni-netd
-              mountPath: /etc/cni/net.d/
-              readOnly: true
+              hostPath:
+                path: /etc/cni/net.d/
             - name: opt-cni-bin
-              mountPath: /opt/cni/bin/
-              readOnly: true
-      containers:
-        - name: kube-bench-exporter
-          image: danielnegreiros/kube-bench-exporter
-          env:
-            - name: OUTPUT_PATH
-              value: /logs/output.log
-            - name: PG_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-postgres-config
-                  key: host
-            - name: PG_USER
-              valueFrom:
-                secretKeyRef:
-                  name: kube-bench-pg-credentials
-                  key: user
-            - name: PG_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: kube-bench-pg-credentials
-                  key: pass
-          volumeMounts:
-            - name: shared-logs
-              mountPath: /logs
-
-      volumes:
-        - name: shared-logs
-          emptyDir: {}
-        - name: var-lib-cni
-          hostPath:
-            path: /var/lib/cni
-        - name: var-lib-etcd
-          hostPath:
-            path: /var/lib/etcd
-        - name: var-lib-kubelet
-          hostPath:
-            path: /var/lib/kubelet
-        - name: var-lib-kube-scheduler
-          hostPath:
-            path: /var/lib/kube-scheduler
-        - name: var-lib-kube-controller-manager
-          hostPath:
-            path: /var/lib/kube-controller-manager
-        - name: etc-systemd
-          hostPath:
-            path: /etc/systemd
-        - name: lib-systemd
-          hostPath:
-            path: /lib/systemd
-        - name: srv-kubernetes
-          hostPath:
-            path: /srv/kubernetes
-        - name: etc-kubernetes
-          hostPath:
-            path: /etc/kubernetes
-        - name: usr-bin
-          hostPath:
-            path: /usr/bin
-        - name: etc-cni-netd
-          hostPath:
-            path: /etc/cni/net.d/
-        - name: opt-cni-bin
-          hostPath:
-            path: /opt/cni/bin/
+              hostPath:
+                path: /opt/cni/bin/
