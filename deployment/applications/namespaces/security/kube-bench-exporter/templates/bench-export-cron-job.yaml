@@ -65,12 +65,12 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}-postgres-config
                   key: host
-            - name: POSTGRES_USER
+            - name: PG_USER
               valueFrom:
                 secretKeyRef:
                   name: kube-bench-pg-credentials
                   key: user
-            - name: POSTGRES_PASSWORD
+            - name: PG_PASS
               valueFrom:
                 secretKeyRef:
                   name: kube-bench-pg-credentials

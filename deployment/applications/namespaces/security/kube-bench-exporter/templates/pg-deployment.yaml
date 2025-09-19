@@ -18,12 +18,12 @@ spec:
         - name: postgres
           image: postgres:15
           env:
-            - name: PG_USER
+            - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   name: kube-bench-pg-credentials
                   key: user
-            - name: PG_PASS
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: kube-bench-pg-credentials
