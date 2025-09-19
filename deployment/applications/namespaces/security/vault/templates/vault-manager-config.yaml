@@ -45,19 +45,17 @@ data:
         path: unlocker
 
       - type: kv-v2
-        path: internal/observability/grafana
-        name: credentials
-        data:
-          user: "admin"
-          password: "*random*"
-
-      - type: kv-v2
         path: cluster
         secrets:
           - path: external/cloudflare/api
             name: token
             data:
               token: "*random*"
+          - path: internal/observability/grafana
+            name: credentials
+            data:
+              user: "admin"
+              password: "*random*"
 
       - type: kv-v2
         path: cluster
