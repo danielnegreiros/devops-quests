@@ -14,18 +14,7 @@ spec:
       containers:
         - name: kube-bench
           image: docker.io/aquasec/kube-bench:v0.12.0
-          command: ["sh", "-c", "kube-bench --json | tee /app/output.log"]
-          env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: kube-bench-pg-credentials
-                  key: user
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: kube-bench-pg-credentials
-                  key: pass
+          command: ["sh", "-c", "kube-bench --json | tee /logs/output.log"]
           volumeMounts:
             - name: shared-logs
               mountPath: /logs
@@ -69,6 +58,8 @@ spec:
         - name: kube-bench-exporter
           image: danielnegreiros/kube-bench-exporter
           env:
+            - name: OUTPUT_PATH
+              value: /logs/output.log
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
