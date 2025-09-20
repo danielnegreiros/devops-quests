@@ -29,6 +29,10 @@ As long as you have Kubernetes and a default PVC storage class available, you ca
 4. Contribute on opened issues
 
 ## 🔥 Challenges
-> **[TLS Certificate Automation](./docs/challenges/01-tls-cert-automation/README.md)**  
+
+> **[[💡 TLS Certificates with Cloudflare, Cert-Manager & Kubernetes and supporting tools](./docs/challenges/01-tls-cert-automation/README.md)**  
 Deploy a nearly 100% automated solution to issue & renew TLS certificates in a Kubernetes cluster with ArgoCD and Helm.
 
+
+> **[🧭 Kube-bench Findings Scraper → DB → Visualization](./docs/challenges/02.kube-bench-exporter/README.md)**  
+We need an application that collects kube-bench findings, stores them in a database, and makes them available for visualization in Grafana.
