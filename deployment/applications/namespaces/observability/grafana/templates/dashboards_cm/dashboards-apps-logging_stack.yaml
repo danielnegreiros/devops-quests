@@ -4,5 +4,7 @@ metadata:
   name: {{ .Release.Name }}-security-dashboards
   labels:
      grafana_dashboard: "1"
+  annotations:
+    grafana_dash_folder: "Security"
 data:
 {{ (.Files.Glob "dashboards/security/*.json").AsConfig | indent 2 }}

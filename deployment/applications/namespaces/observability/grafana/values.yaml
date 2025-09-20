@@ -7,6 +7,7 @@ grafana:
   sidecar:
     skipTlsVerify: true
     dashboards:
+      folderAnnotation: grafana_dash_folder
       enabled: true
     datasources:
       enabled: true
