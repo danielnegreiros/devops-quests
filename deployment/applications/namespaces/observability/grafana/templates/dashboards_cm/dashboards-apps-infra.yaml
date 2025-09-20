@@ -5,6 +5,6 @@ metadata:
   labels:
      grafana_dashboard: "1"
   annotations:
-    grafana_dash_folder: "Security/Infra"
+    grafana_dash_folder: "Infra"
 data:
 {{ (.Files.Glob "dashboards/infra/*.json").AsConfig | indent 2 }}
