@@ -7,4 +7,4 @@ metadata:
   annotations:
     grafana_dash_folder: "Infra"
 data:
-{{ (.Files.Glob "dashboards/infra/*.json").AsConfig | indent 2 }}
+{{ (.Files.Glob "dashboards/security/infra/*.json").AsConfig | indent 2 }}
