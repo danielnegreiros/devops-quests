@@ -6,5 +6,7 @@ grafana:
 
   sidecar:
     skipTlsVerify: true
+    dashboards:
+      enabled: true
     datasources:
       enabled: true
