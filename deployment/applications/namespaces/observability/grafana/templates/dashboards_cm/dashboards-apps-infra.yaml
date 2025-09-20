@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-infra-dashboards
+  labels:
+     grafana_dashboard: "1"
+  annotations:
+    grafana_dash_folder: "Security/Infra"
+data:
+{{ (.Files.Glob "dashboards/infra/*.json").AsConfig | indent 2 }}
