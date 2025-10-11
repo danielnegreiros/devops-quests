@@ -4,7 +4,7 @@ metadata:
   name: kube-bench
   namespace: security
 spec:
-  schedule: "* * * * *"  # Run every hour at minute 0
+  schedule: "0 * * * *"  # Run every hour at minute 0
   jobTemplate:
     spec:
       template:

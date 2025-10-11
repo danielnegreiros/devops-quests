@@ -19,11 +19,12 @@ This setup builds on top of the services implemented in [challenge 1](../01-tls-
 
 - **Stats**
 
-![Stats](../imgs/02.stats.png)
+![alt text](../imgs/02-sec-01.png) <br />
+![alt text](../imgs/02-sec-02.png) <br />
+![alt text](../imgs/02-sec-03.png) <br />
+![alt text](../imgs/02-sec-04.png) <br />
 
-- **Data**
 
-![Data](../imgs/02listing.png)
 
 ---
 
