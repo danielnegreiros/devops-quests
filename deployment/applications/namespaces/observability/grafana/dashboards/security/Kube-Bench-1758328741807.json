@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 8,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -115,11 +115,16 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "text",
+                "color": "green",
                 "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
-          }
+          },
+          "unit": "short"
         },
         "overrides": []
       },
@@ -129,22 +134,20 @@
         "x": 6,
         "y": 1
       },
-      "id": 7,
+      "id": 105,
       "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
+        "colorMode": "none",
+        "graphMode": "area",
+        "justifyMode": "auto",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+          "calcs": [],
+          "fields": "/.*/",
+          "values": true
         },
         "showPercentChange": false,
-        "textMode": "value",
+        "textMode": "auto",
         "wideLayout": true
       },
       "pluginVersion": "12.1.1",
@@ -157,7 +160,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT cluster_name AS \"Current Cluster\"\nFROM kube_bench_reports\nWHERE $__timeFilter(scan_timestamp)\nORDER BY scan_timestamp DESC\nLIMIT 1;",
+          "rawSql": "SELECT\n  cluster_name \nFROM kube_bench_reports\nORDER BY scan_timestamp DESC \nLIMIT 1;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -178,7 +181,7 @@
           }
         }
       ],
-      "title": "Cluster Name",
+      "title": "New panel",
       "type": "stat"
     },
     {
@@ -1341,8 +1344,7 @@
             },
             "properties": [
               {
-                "id": "custom.width",
-                "value": null
+                "id": "custom.width"
               },
               {
                 "id": "custom.cellOptions",
@@ -1934,5 +1936,5 @@
   "timezone": "browser",
   "title": "Kube-Bench Security Compliance Dashboard",
   "uid": "kube_bench_enhanced_v2",
-  "version": 3
+  "version": 1
 }
