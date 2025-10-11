@@ -30,7 +30,7 @@ As long as you have Kubernetes and a default PVC storage class available, you ca
 
 ## 🔥 Challenges
 
-> **[[💡 TLS Certificates with Cloudflare, Cert-Manager & Kubernetes and supporting tools](./docs/challenges/01-tls-cert-automation/README.md)**  
+> **[💡 TLS Certificates with Cloudflare, Cert-Manager & Kubernetes and supporting tools](./docs/challenges/01-tls-cert-automation/README.md)**  
 Deploy a nearly 100% automated solution to issue & renew TLS certificates in a Kubernetes cluster with ArgoCD and Helm.
 
 
