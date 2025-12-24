@@ -2,7 +2,7 @@ harbor:
   expose:
     tls:
       secret:
-        secretName: ingress-tls-certificate
+        secretName: harbor-tls-secret
     ingress:
       className: nginx
       hosts:
