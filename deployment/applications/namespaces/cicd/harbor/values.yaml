@@ -1,0 +1,11 @@
+harbor:
+  expose:
+    tls:
+      secret:
+        secretName: ingress-tls-certificate
+    ingress:
+      className: nginx
+      hosts:
+        core: harbor.demo.zebreje.uk
+        notary: notary.demo.zebreje.uk
+  externalURL: https://harbor.demo.zebreje.uk

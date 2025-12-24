@@ -17,3 +17,5 @@ applications:
     - name: ingress-nginx
   observability:
     - name: grafana
+  cicd:
+    - name: harbor
