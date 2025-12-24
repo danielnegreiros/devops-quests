@@ -1,6 +1,7 @@
 harbor:
   expose:
     tls:
+      certSource: secret
       secret:
         secretName: harbor-tls-secret
     ingress:
