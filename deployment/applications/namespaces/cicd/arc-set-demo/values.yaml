@@ -1,9 +1,9 @@
 gha-runner-scale-set:
   githubConfigUrl: https://github.com/danielnegreirosb
   githubConfigSecret: arc-pat
-  # controllerServiceAccount:
-  #   name: actions-runner-controller
-  #   namespace: cicd   # match your controller's namespace!
+  controllerServiceAccount:
+    name: actions-runner-controller
+    namespace: cicd   # match your controller's namespace!
   template:
     spec:
       initContainers:

@@ -19,4 +19,5 @@ applications:
     - name: grafana
   cicd:
     - name: harbor
+    - name: arc
     - name: arc-set-demo
