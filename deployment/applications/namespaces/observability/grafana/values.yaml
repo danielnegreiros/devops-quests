@@ -4,6 +4,16 @@ grafana:
     userKey: grafana-admin-user
     passwordKey: grafana-admin-password
 
+  grafana.ini:
+    auth.jwt:
+      enabled: true
+      auto_sign_up: true
+      email_claim: email
+      username_claim: sub
+      header_name: Authorization
+      jwk_set_url: https://fake-auth.cicd/identity/v1/token/pem
+      cache_ttl: 60m
+
   sidecar:
     skipTlsVerify: true
     dashboards:
