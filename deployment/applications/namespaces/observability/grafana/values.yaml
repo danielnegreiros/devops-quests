@@ -5,6 +5,8 @@ grafana:
     passwordKey: grafana-admin-password
 
   grafana.ini:
+    security:
+      allow_embedding: true
     auth.jwt:
       enabled: true
       auto_sign_up: true
