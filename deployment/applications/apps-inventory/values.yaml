@@ -9,6 +9,7 @@ config:
 applications:
   security:
     - name: vault
+    - name: vault-operator
     - name: external-secrets-operator
     - name: cert-manager
     - name: kube-bench-exporter

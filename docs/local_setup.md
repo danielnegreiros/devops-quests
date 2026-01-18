@@ -53,5 +53,5 @@ kubectl get secret argocd-initial-admin-secret -n argo -o jsonpath='{.data.passw
 
 ```bash
 cd devops-quests/deployment/applications/apps-inventory
-helm upgrade --install argo-apps ./ -f ./values.yaml --create-namespace
+helm upgrade --install -n=argo argo-apps ./ -f ./values.yaml --create-namespace
 ```
