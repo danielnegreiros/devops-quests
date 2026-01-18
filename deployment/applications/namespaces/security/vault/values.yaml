@@ -1,29 +1,29 @@
-vault:
-  server:
-    image:
-      pullPolicy: IfNotPresent
-    extraContainers:
-      - name: vault-manager
-        image: danielnegreiros/vault-local-auto-unlocker
-        env:
-          - name: CONF_PATH
-            value: /home/vaultmanager/provisioner/secrets_provisioning.yaml
-        volumeMounts:
-          - mountPath: /home/vaultmanager
-            name: home-volume
-          - mountPath: /home/vaultmanager/provisioner
-            name: config-volume
+# vault:
+#   server:
+#     image:
+#       pullPolicy: IfNotPresent
+#     extraContainers:
+#       - name: vault-manager
+#         image: danielnegreiros/vault-local-auto-unlocker
+#         env:
+#           - name: CONF_PATH
+#             value: /home/vaultmanager/provisioner/secrets_provisioning.yaml
+#         volumeMounts:
+#           - mountPath: /home/vaultmanager
+#             name: home-volume
+#           - mountPath: /home/vaultmanager/provisioner
+#             name: config-volume
 
-    volumes:
-      - name: home-volume
-        persistentVolumeClaim:
-          claimName: home-pvc
-      - name: config-volume
-        configMap:
-          name: provisioner-config
-          items:
-          - key: secrets_provisioning.yaml
-            path: secrets_provisioning.yaml
-    service:
-      type: NodePort
-      nodePort: 30040
+#     volumes:
+#       - name: home-volume
+#         persistentVolumeClaim:
+#           claimName: home-pvc
+#       - name: config-volume
+#         configMap:
+#           name: provisioner-config
+#           items:
+#           - key: secrets_provisioning.yaml
+#             path: secrets_provisioning.yaml
+#     service:
+#       type: NodePort
+#       nodePort: 30040
