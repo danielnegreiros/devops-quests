@@ -5,7 +5,7 @@ controllerManager:
     image:
       repository: harbor.demo.zebreje.uk/devops/vault-operator
       tag: latest
-    imagePullPolicy: IfNotPresent
+    imagePullPolicy: Always
     args:
       - "--leader-elect"
       - "--metrics-bind-address=:8443"
