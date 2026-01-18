@@ -25,6 +25,8 @@ spec:
         {{- end }}
         {{- end }}
     spec:
+      imagePullSecrets:
+        - name: harbor-regcred
       containers:
         - name: manager
           args:
