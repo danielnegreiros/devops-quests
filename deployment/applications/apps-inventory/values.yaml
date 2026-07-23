@@ -18,6 +18,8 @@ applications:
     - name: ingress-nginx
   observability:
     - name: grafana
+    - name: signoz
+    - name: signoz-k8s-infra
   cicd:
     - name: harbor
     - name: arc

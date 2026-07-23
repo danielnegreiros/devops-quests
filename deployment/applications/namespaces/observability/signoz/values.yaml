@@ -1,0 +1,4 @@
+# signoz:
+#   otelCollector:
+#     service:
+#       type: NodePort

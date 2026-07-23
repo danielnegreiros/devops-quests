@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: signoz-ingress
+  # annotations:
+    # kubernetes.io/ingress.class: nginx
+    # nginx.ingresks.kubernetes.io/force-ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - signoz.demo.zebreje.uk
+  rules:
+    - host: "signoz.demo.zebreje.uk"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: signoz
+                port:
+                  number: 8080

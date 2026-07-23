@@ -1,0 +1,12 @@
+k8s-infra:
+  global:
+    cloud: others
+    clusterName: platform-engineering
+    deploymentEnvironment: prod
+  otelCollectorEndpoint: signoz-otel-collector:4317
+  otelInsecure: true
+  presets:
+    otlpExporter:
+      enabled: true
+    loggingExporter:
+      enabled: true
